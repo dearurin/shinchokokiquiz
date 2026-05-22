@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本格『信長公記クイズ』 — 織田信長の一代記に挑む</title>
+  <meta name="description"
+    content="織田信長の一代記『信長公記』を紐解く102問の本格歴史クイズゲーム！天下統一への軌跡、本能寺の変などの歴史的出来事からマニアックな逸話まで網羅した究極の歴史サバイバルクイズに挑もう！">
+
+  <!-- SEO & Social Icons -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+
+  <!-- Preconnect Google Fonts for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- Background Decorative Canvas for Particles -->
+  <canvas id="canvas-particles"></canvas>
+  <div class="bg-pattern"></div>
+
+  <!-- Primary Application Layout -->
+  <div class="app-container">
+
+    <!-- Application Header -->
+    <header class="app-header">
+      <div class="logo-container" id="header-logo">
+        <span class="logo-sub">Shinchokoki Chronicles Quiz</span>
+        <h1 class="logo-main" id="app-title-h1">信長公記クイズ</h1>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content Area (SPA Screens) -->
+    <main class="app-main">
+
+      <!-- ==========================================
+           SCREEN 1: HOME / MAIN MENU
+           ========================================== -->
+      <section id="home-screen" class="screen active">
+        <div class="glass-card">
+          <div class="home-intro">
+            <h2 class="float-anim">「信長公の波乱の一代記」に挑む</h2>
+            <p>
+              太田牛一が記した織田信長の一代記『信長公記』。吉法師の元服から本能寺の変までの数多の武勲、天下布武への軌跡、そして謎多き逸話を紐解く全102問の本格歴史クイズ！間違えると減少するライフ（初期値3）を維持しながら、全問制覇を目指して突き進みましょう！
+            </p>
+          </div>
+
+          <!-- Player Stat Summary Drawer -->
+          <div class="home-stats-preview">
+            <div class="stat-item" title="ゲームオーバーまでに正解した最高問題数">
+              <div class="stat-val" id="home-high-score">0問</div>
+              <div class="stat-lbl">最高正解数</div>
+            </div>
+            <div class="stat-item" title="これまでの総クイズ解答数">
+              <div class="stat-val" id="home-total-answered">0</div>
+              <div class="stat-lbl">総解答数</div>
+            </div>
+          </div>
+
+          <!-- Mode Choices -->
+          <div class="mode-grid">
+            <button class="mode-card primary-play-btn" id="btn-mode-start" style="width: 100%; grid-column: 1 / -1;">
+              <div class="mode-icon"><i class="fa-solid fa-crown"></i></div>
+              <div class="mode-details">
+                <h3>全問挑戦（ライフ制）を始める</h3>
+                <p>ライフが3つ。間違えると減少し、全問制覇（全102問）を目指す限界突破モード！ゲームオーバーまでに何問正解できるか挑みましょう！</p>
+              </div>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SCREEN 2: QUIZ INTERACTIVE INTERFACE
+           ========================================== -->
+      <section id="quiz-screen" class="screen">
+        <div class="glass-card">
+          <!-- Live Stats Header -->
+          <div class="quiz-header-bar">
+            <!-- Combo indicator -->
+            <div class="combo-badge" id="quiz-combo-badge">
+              <i class="fa-solid fa-fire"></i> <span id="quiz-combo-num">0</span> COMBO!
+            </div>
+
+            <!-- Score & Lives container -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <!-- Lives (Always visible) -->
+              <div class="lives-container" id="quiz-lives-container" style="display: flex;">
+                <i class="fa-solid fa-heart life-heart" data-life="1"></i>
+                <i class="fa-solid fa-heart life-heart" data-life="2"></i>
+                <i class="fa-solid fa-heart life-heart" data-life="3"></i>
+              </div>
+
+              <!-- Points -->
+              <div class="score-badge">
+                正解数: <span id="quiz-score-val" style="font-weight: 800;">0</span> 問
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Bar Indicator -->
+          <div class="progress-container">
+            <div class="progress-info">
+              <span id="quiz-mode-name">全問挑戦 (ライフ制)</span>
+              <span class="progress-num">第 <span id="quiz-current-idx">1</span> / <span id="quiz-total-idx">102</span>
+                問</span>
+            </div>
+            <div class="progress-bar-outer">
+              <div class="progress-bar-inner" id="quiz-progress-bar"></div>
+            </div>
+          </div>
+
+          <!-- The Question Card -->
+          <div class="question-card" id="quiz-question-card">
+            <h3 class="question-text" id="quiz-question-text">読み込み中...</h3>
+          </div>
+
+          <!-- Choices Container -->
+          <div class="choices-container" id="quiz-choices-container">
+            <!-- Generated dynamically via JS -->
+            <button class="choice-btn">
+              <span><span class="choice-num">1</span> 東京都</span>
+              <i class="fa-solid fa-check choice-status-icon"></i>
+            </button>
+          </div>
+
+          <!-- Explanatory Panel (hidden by default, shown after select) -->
+          <div class="explanation-panel" id="quiz-explanation-panel">
+            <div class="explanation-title" id="quiz-explanation-title">
+              <i class="fa-solid fa-circle-check"></i> <span>正解！</span>
+            </div>
+            <p class="explanation-desc" id="quiz-explanation-desc">
+              解説テキストがここに入ります。
+            </p>
+          </div>
+
+          <!-- Bottom Control Bar -->
+          <div class="quiz-actions">
+            <button class="btn btn-primary" id="btn-quiz-next" disabled>
+              次に進む <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SCREEN 3: QUIZ END RESULT SUMMARY
+           ========================================== -->
+      <section id="result-screen" class="screen">
+        <div class="glass-card result-container">
+
+
+          <div class="result-score-label"
+            style="font-family: var(--font-calligraphy); font-size: 1.25rem; color: var(--color-text-subtle); margin-bottom: 0.2rem; font-weight: 700;">
+            今回の正解数</div>
+          <div class="result-score-val" id="result-score-points" style="margin-bottom: 0.5rem;">0問</div>
+          <h2 class="result-score-title" id="result-title-text">挑戦完了！</h2>
+          <p class="result-feedback" id="result-feedback-text">素晴らしい！全問クリア！</p>
+
+          <!-- Result Details Stats Row -->
+          <div class="result-stats-row">
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="result-stat-accuracy">0%</div>
+              <div class="result-stat-lbl">正解率</div>
+            </div>
+            <div class="result-stat-card">
+              <div class="result-stat-val" id="result-stat-combo">0</div>
+              <div class="result-stat-lbl">最大コンボ</div>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn btn-primary" id="btn-result-replay">
+              <i class="fa-solid fa-rotate-left"></i> もう一度遊ぶ
+            </button>
+            <button class="btn btn-secondary full-width" id="btn-result-home">
+              <i class="fa-solid fa-house"></i> トップメニューに戻る
+            </button>
+          </div>
+
+          <!-- Share Section -->
+          <div class="share-section">
+            <h4>結果をみんなに共有する</h4>
+            <div class="share-btns">
+              <a href="#" class="share-btn x-twitter" id="btn-share-twitter" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-x-twitter"></i> Xでポスト
+              </a>
+              <a href="#" class="share-btn line" id="btn-share-line" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-line"></i> LINEで送る
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+    </main>
+
+    <!-- Footer Copyright -->
+    <footer class="app-footer">
+      <p>&copy; 2026 であるりん. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================
+       MODAL DIALOGS & OVERLAYS
+       ========================================== -->
+
+
+
+  <!-- Game Scripts -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

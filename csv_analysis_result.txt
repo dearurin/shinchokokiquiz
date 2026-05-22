@@ -1,0 +1,27 @@
+Total parsed questions: 102
+
+Volume distribution:
+  巻一: 4 questions
+  巻七: 5 questions
+  巻三: 6 questions
+  巻九: 6 questions
+  巻二: 7 questions
+  巻八: 7 questions
+  巻十: 2 questions
+  巻十一: 1 questions
+  巻十五: 7 questions
+  巻十四: 1 questions
+  巻四: 1 questions
+  首: 55 questions
+
+First 10 parsed questions:
+  ID 1 (首): 『信長公記』では、尾張国は何郡と説明されている？... -> Ans: 八郡
+  ID 2 (首): 尾張上四郡の勢力として、岩倉に居城したとされるのは誰？... -> Ans: 織田伊勢守
+  ID 3 (首): 織田信長の幼名はどれ？... -> Ans: 吉法師
+  ID 4 (首): 織田備後守が嫡男・吉法師に譲った城はどれ？... -> Ans: 那古野城
+  ID 5 (首): 信長が元服した時の年齢として本文に出るのは？... -> Ans: 十三歳
+  ID 6 (首): 元服した時の信長の名前はどれ？... -> Ans: 織田三郎信長
+  ID 7 (首): 若い信長が朝夕稽古したとされるものは何？... -> Ans: 馬
+  ID 8 (首): 若い頃の信長が川で水泳の訓練をしていた期間は？... -> Ans: 3月～9月
+  ID 9 (首): 信長が「短いのは悪い」と考えた武器はどれ？... -> Ans: 槍
+  ID 10 (首): 信長の鉄砲稽古の師匠は誰？... -> Ans: 橋本一巴
