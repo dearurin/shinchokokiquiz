@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      1. CONSTANTS & SYSTEM CONFIGURATION
      ========================================================================== */
-  
+
   // 御朱印帳機能は廃止されました
 
   /* ==========================================================================
@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const state = {
     // 画面状態: 'home', 'quiz', 'result'
     currentScreen: 'home',
-    
+
     // ゲーム設定・進行
     selectedMode: 'endless',    // 'endless' (全問挑戦・ライフ制)
     questionsQueue: [],         // シャッフルされた出題予定の配列
     currentQuestionIndex: 0,    // 現在の問題インデックス
-    
+
     // プレイデータ
     score: 0,                   // 互換性のために残す（使用しない）
     combo: 0,
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lives: 3,                   // 残りライフ
     correctCount: 0,
     isAnswered: false,          // 現在の問題に回答済みかどうか
-    
+
     // 永続セーブデータ（ローカルストレージから復元）
     savedData: {
       highScore: 0,             // 最高正解数 (0〜102)
@@ -55,15 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
       quiz: document.getElementById('quiz-screen'),
       result: document.getElementById('result-screen')
     },
-    
+
     // ボタン & ナビゲーション
     logo: document.getElementById('header-logo'),
     btnStart: document.getElementById('btn-mode-start'),
-    
+
     // ホーム画面データ
     homeHighScore: document.getElementById('home-high-score'),
     homeTotalAnswered: document.getElementById('home-total-answered'),
-    
+
     // クイズ画面要素
     quizScoreVal: document.getElementById('quiz-score-val'),
     quizLivesContainer: document.getElementById('quiz-lives-container'),
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     quizExplanationTitle: document.getElementById('quiz-explanation-title'),
     quizExplanationDesc: document.getElementById('quiz-explanation-desc'),
     btnQuizNext: document.getElementById('btn-quiz-next'),
-    
+
     // 結果画面要素
     resultTitleText: document.getElementById('result-title-text'),
     resultScorePoints: document.getElementById('result-score-points'),
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           osc.type = type;
           osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-          
+
           gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
           // 音を徐々にフェードアウトさせて自然な余韻を作る
           gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const canvas = document.getElementById('canvas-particles');
   const ctx = canvas.getContext('2d');
-  
+
   let particles = [];
   let isRainingSakura = true; // ホーム画面などで穏やかに桜を降らせる
 
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.x = x;
       this.y = y;
       this.type = type; // 'sakura' (桜の風情), 'ember' (戦火の火の粉), 'confetti' (大戦祝賀の紙吹雪)
-      
+
       if (type === 'sakura') {
         this.size = Math.random() * 8 + 6;
         this.speedX = Math.random() * 1.5 + 0.5;
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.gravity = -0.005; // かすかに浮上し続ける
         this.rotation = Math.random() * 360;
         this.rotationSpeed = Math.random() * 4 - 2;
-        
+
         const embers = [
           `rgba(212, 163, 44, ${Math.random() * 0.4 + 0.6})`,  // 山吹色 (ゴールド)
           `rgba(217, 56, 58, ${Math.random() * 0.4 + 0.6})`,   // 朱赤
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.gravity = 0.2;
         this.rotation = Math.random() * 360;
         this.rotationSpeed = Math.random() * 10 - 5;
-        
+
         const colors = [
           '#d9383a', // 朱赤 (Shuaka)
           '#d4a32c', // 山吹色 (Yamabuki Gold)
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.y += this.speedY;
       this.rotation += this.rotationSpeed;
       this.opacity -= this.decay;
-      
+
       // 桜が画面外（下）に出たら少しリサイクル
       if (this.type === 'sakura' && this.y > canvas.height) {
         this.y = -10;
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.opacity = Math.random() * 0.3 + 0.6;
         this.speedY = Math.random() * 1.5 + 1.0;
       }
-      
+
       // 戦火の火の粉が画面外（上）に出たら少しリサイクル
       if (this.type === 'ember' && this.y < -10) {
         this.y = canvas.height + 10;
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, 2 * Math.PI);
         ctx.fill();
-        
+
         // 切り込みを入れてより桜っぽく
         ctx.beginPath();
         ctx.moveTo(this.size, 0);
@@ -336,8 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < splashCount; i++) {
       // 画面中央下から上に向かって勢いよく拡散
       particles.push(new Particle(
-        spawnX + (Math.random() * 60 - 30), 
-        spawnY + (Math.random() * 60 - 30), 
+        spawnX + (Math.random() * 60 - 30),
+        spawnY + (Math.random() * 60 - 30),
         type
       ));
     }
@@ -346,13 +346,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // アニメーションループ
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // パーティクルの更新と描画
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
       p.update();
       p.draw();
-      
+
       // 不透明度が0になったパーティクルを削除（ただし、背景の火の粉はリサイクルされるため除く）
       if (p.opacity <= 0) {
         particles.splice(i, 1);
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   function showScreen(screenId) {
     sound.click();
-    
+
     // 背景演出の最適化
     if (screenId === 'quiz') {
       isRainingSakura = false; // クイズ中は集中できるように背景の桜・火の粉を一時停止
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      8. QUIZ ENGINE LOGIC
      ========================================================================== */
-  
+
   // クイズを開始
   function startQuiz() {
     state.selectedMode = 'endless';
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // UI更新
     DOM.quizCurrentIdx.textContent = index + 1;
-    
+
     // 進捗プログレスバー
     const progressPercent = (index / state.questionsQueue.length) * 100;
     DOM.quizProgressBar.style.width = `${progressPercent}%`;
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 選択肢の描画（選択肢をシャッフル）
     const shuffledChoices = [...question.choices].sort(() => Math.random() - 0.5);
-    
+
     DOM.quizChoicesContainer.innerHTML = '';
     shuffledChoices.forEach((choice, idx) => {
       const btn = document.createElement('button');
@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sound.correct();
       state.correctCount += 1;
       state.combo += 1;
-      
+
       if (state.combo > state.maxCombo) {
         state.maxCombo = state.combo;
       }
@@ -641,8 +641,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 次の問題へ
   function nextQuestion() {
     // ライフ切れ、または問題終了判定
-    if ((state.selectedMode === 'endless' && state.lives <= 0) || 
-        (state.currentQuestionIndex === state.questionsQueue.length - 1)) {
+    if ((state.selectedMode === 'endless' && state.lives <= 0) ||
+      (state.currentQuestionIndex === state.questionsQueue.length - 1)) {
       endQuiz();
     } else {
       state.currentQuestionIndex += 1;
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (DOM.resultScorePoints) {
         DOM.resultScorePoints.textContent = `${state.correctCount} 問`;
       }
-      
+
       if (state.savedData) {
         if (state.correctCount > state.savedData.highScore) {
           state.savedData.highScore = state.correctCount;
@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 正解率計算
       const answeredCount = Math.max(1, state.currentQuestionIndex + 1); // 0除算防止
       const accuracy = Math.round((state.correctCount / answeredCount) * 100);
-      
+
       if (DOM.resultStatAccuracy) {
         DOM.resultStatAccuracy.textContent = `${accuracy}%`;
       }
@@ -711,7 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         feedback = "挑戦お疲れ様でした！もう一度遊んで、信長公の数々の武勲と奇跡を学びましょう！";
       }
-      
+
       if (DOM.resultFeedbackText) {
         DOM.resultFeedbackText.textContent = feedback;
       }
@@ -735,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // SNS共有用リンクのセットアップ
   function setupShareLinks(accuracy) {
-    const shareText = `本格『信長公記クイズ』の「全問挑戦（ライフ制）」に挑戦！\n【正解数: ${state.correctCount}問 / 102問 (正解率: ${accuracy}%)】\nみんなも挑戦して信長公記クイズ全問クリアを目指そう！\n`;
+    const shareText = `『信長公記クイズ』に挑戦！\n【正解数: ${state.correctCount}問 / 102問 (正解率: ${accuracy}%)】\nみんなも挑戦して信長公記クイズ全問クリアを目指そう！\n`;
     const shareUrl = window.location.href;
 
     // Twitter (X) Share URL
@@ -747,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      9. EVENT LISTENERS
      ========================================================================== */
-  
+
   // ロゴクリックでトップへ戻る
   DOM.logo.addEventListener('click', () => {
     if (state.currentScreen === 'quiz') {
