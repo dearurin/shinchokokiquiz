@@ -811,9 +811,10 @@ body {
 /* Result Stats Row */
 .result-stats-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
+  max-width: 200px;
 }
 
 .result-stat-card {

@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resultScorePoints: document.getElementById('result-score-points'),
     resultFeedbackText: document.getElementById('result-feedback-text'),
     resultStatAccuracy: document.getElementById('result-stat-accuracy'),
-    resultStatCombo: document.getElementById('result-stat-combo'),
     btnResultReplay: document.getElementById('btn-result-replay'),
     btnResultHome: document.getElementById('btn-result-home'),
     btnShareTwitter: document.getElementById('btn-share-twitter'),
@@ -700,9 +699,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (DOM.resultStatAccuracy) {
         DOM.resultStatAccuracy.textContent = `${accuracy}%`;
       }
-      if (DOM.resultStatCombo) {
-        DOM.resultStatCombo.textContent = `${state.maxCombo}回`;
-      }
 
       // フィードバックテキストの設定
       let feedback = "";
@@ -739,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // SNS共有用リンクのセットアップ
   function setupShareLinks(accuracy) {
-    const shareText = `本格『信長公記クイズ』の「全問挑戦（ライフ制）」に挑戦！\n【正解数: ${state.correctCount}問 / 102問 (正解率: ${accuracy}%)】\n最大コンボ: ${state.maxCombo}回！\nみんなも挑戦して信長公記クイズ全問クリアを目指そう！\n`;
+    const shareText = `本格『信長公記クイズ』の「全問挑戦（ライフ制）」に挑戦！\n【正解数: ${state.correctCount}問 / 102問 (正解率: ${accuracy}%)】\nみんなも挑戦して信長公記クイズ全問クリアを目指そう！\n`;
     const shareUrl = window.location.href;
 
     // Twitter (X) Share URL
