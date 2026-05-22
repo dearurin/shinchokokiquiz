@@ -65,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     homeTotalAnswered: document.getElementById('home-total-answered'),
     
     // クイズ画面要素
-    quizComboBadge: document.getElementById('quiz-combo-badge'),
-    quizComboNum: document.getElementById('quiz-combo-num'),
     quizScoreVal: document.getElementById('quiz-score-val'),
     quizLivesContainer: document.getElementById('quiz-lives-container'),
     quizModeName: document.getElementById('quiz-mode-name'),
@@ -477,7 +475,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     DOM.quizTotalIdx.textContent = state.questionsQueue.length;
     DOM.quizScoreVal.textContent = "0";
-    DOM.quizComboBadge?.classList.remove('active');
 
     loadQuestion(0);
     showScreen('quiz');
@@ -573,12 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
         spawnSplash('ember');    // 通常は戦火・黄金の火の粉（桜吹雪の代わりに）
       }
 
-      // コンボバッジ表示
-      if (state.combo > 1) {
-        if (DOM.quizComboNum) DOM.quizComboNum.textContent = state.combo;
-        DOM.quizComboBadge?.classList.add('active');
-      }
-
       // ボタンのスタイル変更
       selectedBtn.classList.add('correct');
 
@@ -589,7 +580,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // ーーー 不正解... ーーー
       sound.incorrect();
       state.combo = 0;
-      DOM.quizComboBadge?.classList.remove('active');
 
       // 画面の揺れ
       DOM.screens.quiz.querySelector('.glass-card').classList.add('shake-anim');
