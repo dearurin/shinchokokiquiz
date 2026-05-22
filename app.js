@@ -739,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const shareUrl = window.location.href;
 
     // Twitter (X) Share URL
-    DOM.btnShareTwitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent('信長公記クイズ,歴史クイズ,織田信長')}`;
+    DOM.btnShareTwitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent('信長公記クイズ')}`;
 
     // LINE Share URL
     DOM.btnShareLine.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
