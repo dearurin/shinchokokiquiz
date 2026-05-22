@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // クイズ画面要素
     quizScoreVal: document.getElementById('quiz-score-val'),
     quizLivesContainer: document.getElementById('quiz-lives-container'),
-    quizModeName: document.getElementById('quiz-mode-name'),
     quizCurrentIdx: document.getElementById('quiz-current-idx'),
     quizTotalIdx: document.getElementById('quiz-total-idx'),
     quizProgressBar: document.getElementById('quiz-progress-bar'),
@@ -468,7 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 全ての問題を利用し、3ライフ制
     state.questionsQueue = shuffledPool; // 全問
     state.lives = 3;
-    DOM.quizModeName.textContent = "全問挑戦 (ライフ制)";
     DOM.quizLivesContainer.style.display = "flex";
     updateLivesUI();
 
