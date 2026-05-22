@@ -35,7 +35,6 @@
     <!-- Application Header -->
     <header class="app-header">
       <div class="logo-container" id="header-logo">
-        <span class="logo-sub">Shinchokoki Chronicles Quiz</span>
         <h1 class="logo-main" id="app-title-h1">信長公記クイズ</h1>
       </div>
     </header>
@@ -51,7 +50,8 @@
           <div class="home-intro">
             <h2 class="float-anim">「信長公の波乱の一代記」に挑む</h2>
             <p>
-              太田牛一が記した織田信長の一代記『信長公記』。吉法師の元服から本能寺の変までの数多の武勲、天下布武への軌跡、そして謎多き逸話を紐解く全102問の本格歴史クイズ！間違えると減少するライフ（初期値3）を維持しながら、全問制覇を目指して突き進みましょう！
+              織田信長の一代記『信長公記』を紐解く、全102問の本格歴史サバイバルクイズ！
+              初期ライフは3つ。間違えると減少するライフを維持しながら、全問制覇を目指しましょう！
             </p>
           </div>
 
@@ -72,7 +72,7 @@
             <button class="mode-card primary-play-btn" id="btn-mode-start" style="width: 100%; grid-column: 1 / -1;">
               <div class="mode-icon"><i class="fa-solid fa-crown"></i></div>
               <div class="mode-details">
-                <h3>全問挑戦（ライフ制）を始める</h3>
+                <h3>クイズ挑戦</h3>
                 <p>ライフが3つ。間違えると減少し、全問制覇（全102問）を目指す限界突破モード！ゲームオーバーまでに何問正解できるか挑みましょう！</p>
               </div>
             </button>
@@ -88,24 +88,16 @@
         <div class="glass-card">
           <!-- Live Stats Header -->
           <div class="quiz-header-bar">
-            <!-- Combo indicator -->
-            <div class="combo-badge" id="quiz-combo-badge">
-              <i class="fa-solid fa-fire"></i> <span id="quiz-combo-num">0</span> COMBO!
+            <!-- Lives (Always visible) -->
+            <div class="lives-container" id="quiz-lives-container" style="display: flex;">
+              <i class="fa-solid fa-heart life-heart" data-life="1"></i>
+              <i class="fa-solid fa-heart life-heart" data-life="2"></i>
+              <i class="fa-solid fa-heart life-heart" data-life="3"></i>
             </div>
 
-            <!-- Score & Lives container -->
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <!-- Lives (Always visible) -->
-              <div class="lives-container" id="quiz-lives-container" style="display: flex;">
-                <i class="fa-solid fa-heart life-heart" data-life="1"></i>
-                <i class="fa-solid fa-heart life-heart" data-life="2"></i>
-                <i class="fa-solid fa-heart life-heart" data-life="3"></i>
-              </div>
-
-              <!-- Points -->
-              <div class="score-badge">
-                正解数: <span id="quiz-score-val" style="font-weight: 800;">0</span> 問
-              </div>
+            <!-- Points -->
+            <div class="score-badge">
+              正解数: <span id="quiz-score-val" style="font-weight: 800;">0</span> 問
             </div>
           </div>
 
